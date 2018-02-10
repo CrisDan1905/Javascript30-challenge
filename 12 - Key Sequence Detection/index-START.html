@@ -7,6 +7,14 @@
 </head>
 <body>
 <script>
+  const pressed = [];
+  const secretCode = 'ragazza hermosa';
+  window.addEventListener('keyup', e => {
+    pressed.push(e.key);
+    pressed.splice(0, pressed.length - secretCode.length);
+    if (pressed.join('').includes(secretCode))
+      cornify_add();
+  });
 </script>
 </body>
 </html>

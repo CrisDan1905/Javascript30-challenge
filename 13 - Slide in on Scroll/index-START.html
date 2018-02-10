@@ -58,6 +58,28 @@
       };
     }
 
+    const sliderImages = document.querySelectorAll('.slide-in');
+
+    function checkSlide(e) {
+      sliderImages.forEach(slideImage => {
+        // halfway trough the image
+        // slideImage.height / 2 para saber la mitad del tamaño de la imagen
+        const slideInAt = (window.scrollY + window.innerHeight) - slideImage.height / 2 // Con "window.scrollY + window.innerHeight" se sabe a que distancia del final de la pagina se está
+        // Bottom of the image
+        const imageBottom =slideImage.offsetTop + slideImage.height // "offsetTop" dice que tan lejos está el tope del elemento html del tope de la pagina
+        const isHalfShown = slideInAt > slideImage.offsetTop;
+        console.log(slideInAt, slideImage.offsetTop);
+        const isNotScrolledPast = window.scrollY < imageBottom;
+
+        if (isHalfShown && isNotScrolledPast)
+          slideImage.classList.add('active');
+        else
+          slideImage.classList.remove('active');
+      })
+    }
+
+    window.addEventListener('scroll', debounce(checkSlide));
+
   </script>
 
   <style>
